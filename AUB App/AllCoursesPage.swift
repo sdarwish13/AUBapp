@@ -16,7 +16,6 @@ var checkDept = false
 struct AllCoursesPage: View {
     @State private var showingSheet = false
     @State private var searchText : String = ""
-    var courses: [Course] = []
     @ObservedObject private var viewModel = AllCoursesViewModel()
     
     
