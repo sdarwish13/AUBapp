@@ -1,0 +1,6 @@
+framework module Pods_AUB_App {
+  umbrella header "Pods-AUB App-umbrella.h"
+
+  export *
+  module * { export * }
+}
