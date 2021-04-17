@@ -100,7 +100,7 @@ struct CoursePage: View {
                         .cornerRadius(10)
                     }
                     VStack{
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        NavigationLink(destination: CourseReview(course : course)) {
                             VStack{
                         
                                 Text("Reviews")

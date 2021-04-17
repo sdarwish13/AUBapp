@@ -12,9 +12,10 @@ struct CourseReview: View {
     @State private var review: String = ""
     let verticalPaddingForForm = 40.0
     @State var text: String = ""
-    var reviews: [Course]=[]
+    var reviews: [Course] = []
     @State private var showError = false
     @State private var errorString = ""
+    @State var course: CourseViewModel = CourseViewModel()
     @EnvironmentObject var userInfo: UserInfo
     
     var body: some View {
@@ -61,9 +62,8 @@ struct CourseReview: View {
                 let format = DateFormatter()
                 format.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 let timestamp = format.string(from: date)
-                print("hello1")
                 
-                FBFirestore.addReview(email: userInfo.user.email, review: text, timeDate: timestamp){ (result) in
+                FBFirestore.addReview(email: userInfo.user.email, review: text, timeDate: timestamp, code: course.code){ (result) in
                         switch result {
                         case .failure(let error):
                                 self.errorString = error.localizedDescription
@@ -71,12 +71,8 @@ struct CourseReview: View {
                         case .success( _):
                             print("Review Course Created Successfully")
                         }
-                    }
-                print("hello2")
-                
-                
-//                print(self.$text)
-//                text=""
+                    }                
+                text = ""
                 
             }) {
                 Text("Post")

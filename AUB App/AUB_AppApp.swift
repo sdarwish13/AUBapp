@@ -18,9 +18,8 @@ struct AUB_AppApp: App {
     var body: some Scene {
         var userInfo = UserInfo()
         WindowGroup {
-//            ContentView().environmentObject(userInfo)
+            ContentView().environmentObject(userInfo)
 //            AllCoursesPage(courses: testData)
-            CourseReview().environmentObject(userInfo)
         }
     }
 }

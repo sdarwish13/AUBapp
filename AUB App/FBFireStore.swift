@@ -85,17 +85,16 @@ enum FBFirestore {
         }
     }
     
-    static func addReview(email: String, review: String, timeDate: String, completion: @escaping (Result<Bool, Error>) -> ()) {
-             Firestore
-            .firestore()
-            .collection("reviews")
-            .document("courses")
-            .collection(email)
-            .document()
+    static func addReview(email: String, review: String, timeDate: String, code: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+        let reference = Firestore.firestore()
+            .collection("courseReviews")
+            .document(email)
+            
+            reference.collection("myreviews").document()
             .setData([
-            "review": review,
-            "timeDate":timeDate
-        ]) { (err) in
+                "course code" : code,
+                "review" : review,
+                "timeDate" : timeDate]) { (err) in
             if let err = err {
                 completion(.failure(err))
                 return
