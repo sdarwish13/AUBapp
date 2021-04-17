@@ -93,9 +93,10 @@ struct AddCourse: View {
                                 self.showError = true
                             case .success( _):
                                 print("Course Created Successfully")
+                                self.presentationMode.wrappedValue.dismiss()
                             }
                         }
-                        self.presentationMode.wrappedValue.dismiss()
+                        
                     }) {
                         Text("Add Course")
                             .padding()

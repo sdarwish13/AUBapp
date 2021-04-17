@@ -14,7 +14,7 @@ class StarredCoursesViewModel: ObservableObject {
     private var db = Firestore.firestore()
 
     func fetchData() {
-        db.collection("courses")
+        db.collection("starred")
             .document(Auth.auth().currentUser?.email ?? "").collection("mycourses").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")

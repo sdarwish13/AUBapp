@@ -102,7 +102,7 @@ struct MainView: View {
             {
                 Text("Current Courses")
             }
-            NavigationLink(destination: AllCoursesPage())
+            NavigationLink(destination: StarredCoursesPage())
             {
                 Text("Starred Courses")
             }

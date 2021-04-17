@@ -27,8 +27,12 @@ struct CoursePage: View {
                         isStarred = !isStarred
                         if(isStarred) {
                             Firestore.firestore().collection("starred").document(userInfo.user.email)
-                                .collection("mycourses").document(course.code)
-                                .setData(["name" : course.code])
+                                .collection("mycourses").document()
+                                .setData(["code" : course.code,
+                                          "name" : course.name,
+                                          "description" : course.description,
+                                          "department" : course.department,
+                                          "faculty" : course.faculty])
                         }
                         if(!isStarred) {
                             Firestore.firestore().collection("starred").document(userInfo.user.email)

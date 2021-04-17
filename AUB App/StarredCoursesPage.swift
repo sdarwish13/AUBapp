@@ -10,7 +10,8 @@ import Firebase
 
 struct StarredCoursesPage: View {
     @State private var showingSheet = false
-    @ObservedObject private var viewModel = AllCoursesViewModel()
+    @State private var searchText : String = ""
+    @ObservedObject private var viewModel = StarredCoursesViewModel()
     
     
     var body: some View {
@@ -23,8 +24,14 @@ struct StarredCoursesPage: View {
 //                    }
 //                }.navigationBarTitle("Users")
                 
+                SearchBar(text: $searchText, placeholder: "Search")
                 List {
-                    ForEach(viewModel.courses) { course in
+                    ForEach(viewModel.courses.filter { course in
+                        if(searchText.isEmpty) {
+                            return true
+                        }
+                        return course.code.lowercased().contains(searchText.lowercased()) || course.name.lowercased().contains(searchText.lowercased()) || course.department.lowercased().contains(searchText.lowercased())
+                    }) { course in
                         NavigationLink(destination: CoursePage(course: course))
                         {
                             VStack {
@@ -41,7 +48,7 @@ struct StarredCoursesPage: View {
                             }
                         }
                     }
-                }.navigationTitle("All Courses")
+                }.navigationTitle("Starred Courses")
                 .onAppear() {
                     self.viewModel.fetchData()
                 }.listStyle(PlainListStyle())
