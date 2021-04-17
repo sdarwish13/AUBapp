@@ -23,6 +23,8 @@
 		565B559326051C8E00894858 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B559226051C8E00894858 /* ForgotPasswordView.swift */; };
 		565B559926051D4B00894858 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B559826051D4B00894858 /* LoginView.swift */; };
 		5677BFA82611D1E8003FA00C /* AddCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677BFA72611D1E8003FA00C /* AddCourse.swift */; };
+		567F20E5262A0B6800BEE7AF /* StarredCoursesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */; };
+		567F20E8262A101500BEE7AF /* StarredCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F20E7262A101500BEE7AF /* StarredCoursesViewModel.swift */; };
 		5687D00F25E7F5260090561D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D00E25E7F5260090561D /* SearchBar.swift */; };
 		5687D01225E829890090561D /* DocumentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D01125E829890090561D /* DocumentsPage.swift */; };
 		5687D01525E82A920090561D /* Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D01425E82A920090561D /* Documents.swift */; };
@@ -57,6 +59,8 @@
 		565B559226051C8E00894858 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		565B559826051D4B00894858 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5677BFA72611D1E8003FA00C /* AddCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourse.swift; sourceTree = "<group>"; };
+		567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarredCoursesPage.swift; sourceTree = "<group>"; };
+		567F20E7262A101500BEE7AF /* StarredCoursesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarredCoursesViewModel.swift; sourceTree = "<group>"; };
 		5687D00E25E7F5260090561D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5687D01125E829890090561D /* DocumentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsPage.swift; sourceTree = "<group>"; };
 		5687D01425E82A920090561D /* Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Documents.swift; sourceTree = "<group>"; };
@@ -118,10 +122,12 @@
 				56D677F426114FAD0029F859 /* MenuView.swift */,
 				561EF46D260680C100837BDA /* HomePage.swift */,
 				56CFA0BC25DD1E1700007F0E /* AllCoursesPage.swift */,
+				567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */,
 				5677BFA72611D1E8003FA00C /* AddCourse.swift */,
 				560DC65726027C47007D1300 /* CoursePage.swift */,
 				5687D01125E829890090561D /* DocumentsPage.swift */,
 				565B55882603901400894858 /* UserInfo.swift */,
+				567F20E7262A101500BEE7AF /* StarredCoursesViewModel.swift */,
 				568B3BDD261DEC3C00C90EAF /* AllCoursesViewModel.swift */,
 				565B558F260490FF00894858 /* UserViewModel.swift */,
 				568B3BD6261DCE8D00C90EAF /* CourseViewModel.swift */,
@@ -291,6 +297,7 @@
 				560DC64E26027793007D1300 /* CheckBox.swift in Sources */,
 				56FB58DD26063FC9006BAFA2 /* FBFireStore.swift in Sources */,
 				568B3BDE261DEC3C00C90EAF /* AllCoursesViewModel.swift in Sources */,
+				567F20E5262A0B6800BEE7AF /* StarredCoursesPage.swift in Sources */,
 				565B55892603901400894858 /* UserInfo.swift in Sources */,
 				565B55902604910000894858 /* UserViewModel.swift in Sources */,
 				5687D01525E82A920090561D /* Documents.swift in Sources */,
@@ -298,6 +305,7 @@
 				5687D01225E829890090561D /* DocumentsPage.swift in Sources */,
 				561EF4552606734100837BDA /* FBAuth.swift in Sources */,
 				568B3BD7261DCE8D00C90EAF /* CourseViewModel.swift in Sources */,
+				567F20E8262A101500BEE7AF /* StarredCoursesViewModel.swift in Sources */,
 				561EF4392606528B00837BDA /* FBFireStoreError.swift in Sources */,
 				560DC65526027AE3007D1300 /* RatingStars.swift in Sources */,
 				560DC65226027897007D1300 /* SignUpPage.swift in Sources */,

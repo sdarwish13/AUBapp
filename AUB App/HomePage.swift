@@ -21,7 +21,6 @@ struct HomePage: View {
                         }
                     }
         
-        
         return NavigationView {
             GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -90,6 +89,10 @@ struct MainView: View {
             NavigationLink(destination: AllCoursesPage())
             {
                 Text("All Courses")
+            }
+            NavigationLink(destination: AllCoursesPage())
+            {
+                Text("All Professors")
             }
             NavigationLink(destination: AllCoursesPage())
             {

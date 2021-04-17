@@ -6,21 +6,36 @@
 //
 
 import Foundation
+import Firebase
 import SwiftUI
-
 
 
 struct CoursePage: View {
     @State var course: CourseViewModel = CourseViewModel()
-    @State private var name: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject var userInfo: UserInfo
+    
     @State private var isStarred: Bool = false
     @State private var rating = 0
     let verticalPaddingForForm = 120.0
+    
+    
     var body: some View {
             VStack(alignment: .center, spacing: 0.0) {
                 HStack {
-                    Button(action: {isStarred = !isStarred})
+                    
+                    Button(action: {
+                        isStarred = !isStarred
+                        if(isStarred) {
+                            Firestore.firestore().collection("starred").document(userInfo.user.email)
+                                .collection("mycourses").document(course.code)
+                                .setData(["name" : course.code])
+                        }
+                        if(!isStarred) {
+                            Firestore.firestore().collection("starred").document(userInfo.user.email)
+                                .collection("mycourses").document(course.code)
+                                .delete()
+                        }
+                    })
                     {
                         Image(systemName: isStarred ? "star.fill" : "star")
                             .font(.title)
@@ -120,8 +135,29 @@ struct CoursePage: View {
                     }
                 }
             }.navigationTitle("\(course.name)")
+            .onAppear() {
+                checkDoc(email : userInfo.user.email, code : course.code)
+            }
         }
+    
+    func checkDoc(email : String, code : String) {
+        Firestore.firestore().collection("starred")
+            .document(email).collection("mycourses")
+            .document(code).getDocument { (document, error) in
+                if let document = document {
+                    if document.exists {
+                        self.isStarred = true
+                    } else {
+                        self.isStarred = false
+                    }
+            }
+        }
+    }
+    
 }
+
+
+
 
 struct CoursePage_Previews: PreviewProvider {
     static var previews: some View {

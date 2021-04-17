@@ -16,6 +16,7 @@ var checkDept = false
 struct AllCoursesPage: View {
     @State private var showingSheet = false
     @State private var searchText : String = ""
+    @EnvironmentObject var userInfo: UserInfo
     @ObservedObject private var viewModel = AllCoursesViewModel()
     
     
@@ -123,6 +124,7 @@ struct AllCoursesPage: View {
             checkDept = isMarked
         }
     }
+    
 }
 
 struct AllCoursesPage_Previews: PreviewProvider {
