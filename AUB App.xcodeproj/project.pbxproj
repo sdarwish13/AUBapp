@@ -40,6 +40,8 @@
 		56FB58DD26063FC9006BAFA2 /* FBFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58DC26063FC9006BAFA2 /* FBFireStore.swift */; };
 		D5CC04D7262AC72A00304A94 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D6262AC72A00304A94 /* CourseReview.swift */; };
 		D5CC04DA262AC73900304A94 /* reviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D9262AC73900304A94 /* reviewsData.swift */; };
+		D5CC04DD262AE12900304A94 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */; };
+		D5CC04E0262AE1AF00304A94 /* CourseReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04DF262AE1AF00304A94 /* CourseReviewViewModel.swift */; };
 		DF4AD6A5AAF7E6E1F046AEA7 /* Pods_AUB_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE37A6352475D30170975C58 /* Pods_AUB_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		BC5CFBA567ED8D600E0DABAB /* Pods-AUB App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AUB App.release.xcconfig"; path = "Target Support Files/Pods-AUB App/Pods-AUB App.release.xcconfig"; sourceTree = "<group>"; };
 		D5CC04D6262AC72A00304A94 /* CourseReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
 		D5CC04D9262AC73900304A94 /* reviewsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewsData.swift; sourceTree = "<group>"; };
+		D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		D5CC04DF262AE1AF00304A94 /* CourseReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewViewModel.swift; sourceTree = "<group>"; };
 		EE37A6352475D30170975C58 /* Pods_AUB_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AUB_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,15 +129,16 @@
 				565B559226051C8E00894858 /* ForgotPasswordView.swift */,
 				56D677F426114FAD0029F859 /* MenuView.swift */,
 				561EF46D260680C100837BDA /* HomePage.swift */,
-				56CFA0BC25DD1E1700007F0E /* AllCoursesPage.swift */,
-				567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */,
 				5677BFA72611D1E8003FA00C /* AddCourse.swift */,
 				560DC65726027C47007D1300 /* CoursePage.swift */,
 				5687D01125E829890090561D /* DocumentsPage.swift */,
 				565B55882603901400894858 /* UserInfo.swift */,
-				567F20E7262A101500BEE7AF /* StarredCoursesViewModel.swift */,
 				568B3BDD261DEC3C00C90EAF /* AllCoursesViewModel.swift */,
 				565B558F260490FF00894858 /* UserViewModel.swift */,
+				D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */,
+				567F20E7262A101500BEE7AF /* StarredCoursesViewModel.swift */,
+				567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */,
+				D5CC04DF262AE1AF00304A94 /* CourseReviewViewModel.swift */,
 				568B3BD6261DCE8D00C90EAF /* CourseViewModel.swift */,
 				560DC64D26027793007D1300 /* CheckBox.swift */,
 				560DC65426027AE3007D1300 /* RatingStars.swift */,
@@ -146,6 +151,7 @@
 				561EF4532606734100837BDA /* FBAuth.swift */,
 				561EF4522606734000837BDA /* FBAuthError.swift */,
 				D5CC04D9262AC73900304A94 /* reviewsData.swift */,
+				56CFA0BC25DD1E1700007F0E /* AllCoursesPage.swift */,
 				D5CC04D6262AC72A00304A94 /* CourseReview.swift */,
 				56CFA0BE25DD1E1900007F0E /* Assets.xcassets */,
 				56CFA0C325DD1E1900007F0E /* Info.plist */,
@@ -299,6 +305,7 @@
 				561EF46E260680C100837BDA /* HomePage.swift in Sources */,
 				56FB58D726063F10006BAFA2 /* FBUser.swift in Sources */,
 				560DC65826027C47007D1300 /* CoursePage.swift in Sources */,
+				D5CC04E0262AE1AF00304A94 /* CourseReviewViewModel.swift in Sources */,
 				561EF4542606734100837BDA /* FBAuthError.swift in Sources */,
 				560DC64E26027793007D1300 /* CheckBox.swift in Sources */,
 				56FB58DD26063FC9006BAFA2 /* FBFireStore.swift in Sources */,
@@ -322,6 +329,7 @@
 				565B558C260396EC00894858 /* ContentView.swift in Sources */,
 				56CFA0BD25DD1E1700007F0E /* AllCoursesPage.swift in Sources */,
 				56FB58DA26063F81006BAFA2 /* FBKeys.swift in Sources */,
+				D5CC04DD262AE12900304A94 /* ReviewViewModel.swift in Sources */,
 				565B559326051C8E00894858 /* ForgotPasswordView.swift in Sources */,
 				56CFA0BB25DD1E1700007F0E /* AUB_AppApp.swift in Sources */,
 			);

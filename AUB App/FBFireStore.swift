@@ -92,7 +92,7 @@ enum FBFirestore {
             
             reference.collection("myreviews").document()
             .setData([
-                "course code" : code,
+                "courseCode" : code,
                 "review" : review,
                 "timeDate" : timeDate]) { (err) in
             if let err = err {

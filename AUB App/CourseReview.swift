@@ -16,12 +16,17 @@ struct CourseReview: View {
     @State private var showError = false
     @State private var errorString = ""
     @State var course: CourseViewModel = CourseViewModel()
-    @EnvironmentObject var userInfo: UserInfo
     
+    @EnvironmentObject var userInfo: UserInfo
+    @ObservedObject private var viewModel = CourseReviewViewModel()
+    
+ 
     var body: some View {
         NavigationView {
             List {
-                ForEach(testData){ review in
+                ForEach(viewModel.reviews){ review in
+                    
+                    if( course.code == review.courseCode){
                     HStack(spacing:0){
                         Button(action: {
                             print("Delete button tapped!")
@@ -32,20 +37,28 @@ struct CourseReview: View {
 //                                .padding(.leading, 5)
                         }
                         VStack{
-                            Text(review.code )
+                            Text(userInfo.user.name)
                                 .bold()
-                                .padding(.leading,-90)
+                                .padding(.leading,5)
                                 .padding(.bottom, 3) // bottom padding
+//                                .padding(.leading, 5)  //left padding
+                           
                             
-                            Text(review.description)
+                            Text(review.review)
                                 .padding(.leading, 5)  //left padding
                         }
 
                         Spacer()
                     }
+                    }
+             
                 }
             }
             .navigationTitle("Reviews")
+            .onAppear() {
+                self.viewModel.fetchData()
+            }
+                
             
         }
         VStack {
@@ -58,6 +71,8 @@ struct CourseReview: View {
             HStack{
                 
             Button(action: {
+                if( text == "")
+                {return}
                 let date = Date()
                 let format = DateFormatter()
                 format.dateFormat = "dd-MM-yyyy HH:mm:ss"
