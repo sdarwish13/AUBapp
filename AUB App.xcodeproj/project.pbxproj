@@ -38,6 +38,8 @@
 		56FB58D726063F10006BAFA2 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58D626063F10006BAFA2 /* FBUser.swift */; };
 		56FB58DA26063F81006BAFA2 /* FBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58D926063F81006BAFA2 /* FBKeys.swift */; };
 		56FB58DD26063FC9006BAFA2 /* FBFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58DC26063FC9006BAFA2 /* FBFireStore.swift */; };
+		D5CC04D7262AC72A00304A94 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D6262AC72A00304A94 /* CourseReview.swift */; };
+		D5CC04DA262AC73900304A94 /* reviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D9262AC73900304A94 /* reviewsData.swift */; };
 		DF4AD6A5AAF7E6E1F046AEA7 /* Pods_AUB_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE37A6352475D30170975C58 /* Pods_AUB_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		56FB58D926063F81006BAFA2 /* FBKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBKeys.swift; sourceTree = "<group>"; };
 		56FB58DC26063FC9006BAFA2 /* FBFireStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBFireStore.swift; sourceTree = "<group>"; };
 		BC5CFBA567ED8D600E0DABAB /* Pods-AUB App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AUB App.release.xcconfig"; path = "Target Support Files/Pods-AUB App/Pods-AUB App.release.xcconfig"; sourceTree = "<group>"; };
+		D5CC04D6262AC72A00304A94 /* CourseReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
+		D5CC04D9262AC73900304A94 /* reviewsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewsData.swift; sourceTree = "<group>"; };
 		EE37A6352475D30170975C58 /* Pods_AUB_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AUB_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +145,8 @@
 				561EF4382606528B00837BDA /* FBFireStoreError.swift */,
 				561EF4532606734100837BDA /* FBAuth.swift */,
 				561EF4522606734000837BDA /* FBAuthError.swift */,
+				D5CC04D9262AC73900304A94 /* reviewsData.swift */,
+				D5CC04D6262AC72A00304A94 /* CourseReview.swift */,
 				56CFA0BE25DD1E1900007F0E /* Assets.xcassets */,
 				56CFA0C325DD1E1900007F0E /* Info.plist */,
 				560DC63925FE6DEA007D1300 /* GoogleService-Info.plist */,
@@ -306,6 +312,8 @@
 				561EF4552606734100837BDA /* FBAuth.swift in Sources */,
 				568B3BD7261DCE8D00C90EAF /* CourseViewModel.swift in Sources */,
 				567F20E8262A101500BEE7AF /* StarredCoursesViewModel.swift in Sources */,
+				D5CC04D7262AC72A00304A94 /* CourseReview.swift in Sources */,
+				D5CC04DA262AC73900304A94 /* reviewsData.swift in Sources */,
 				561EF4392606528B00837BDA /* FBFireStoreError.swift in Sources */,
 				560DC65526027AE3007D1300 /* RatingStars.swift in Sources */,
 				560DC65226027897007D1300 /* SignUpPage.swift in Sources */,
