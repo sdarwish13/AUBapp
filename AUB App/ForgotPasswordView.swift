@@ -58,7 +58,7 @@ struct ForgotPasswordView: View {
              
             }.padding(.bottom, -54)
              .navigationBarTitle("Request a password reset", displayMode: .inline)
-             .navigationBarItems(trailing: Button("Dismiss") {
+             .navigationBarItems(trailing: Button("Cancel") {
                  self.presentationMode.wrappedValue.dismiss()
              })
             .alert(isPresented: $showAlert) {

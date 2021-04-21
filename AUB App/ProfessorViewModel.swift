@@ -1,28 +1,28 @@
 //
-//  CourseViewModel.swift
+//  ProfessorViewModel.swift
 //  AUB App
 //
-//  Created by Sara Darwish  on 07/04/2021.
+//  Created by Sara Darwish  on 17/04/2021.
 //
 
 import Foundation
 
-struct CourseViewModel: Identifiable {
+struct ProfessorViewModel: Identifiable {
     var id: String = UUID().uuidString
-    var code: String = ""
     var name: String = ""
-    var description: String = ""
+    var email: String = ""
+    var officeHours: String = ""
     var department: String = ""
     var faculty: String = ""
-        
+    
     
     func isEmpty(_field: String) -> Bool {
         return _field.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    func isCodeValid(_code: String) -> Bool {
-        let test = NSPredicate(format: "SELF MATCHES %@","[A-Z]{4}[0-9]{3}[A-Z]?")
-        return test.evaluate(with: code)
+    func isEmailValid(_email: String) -> Bool {
+        let test = NSPredicate(format: "SELF MATCHES %@","[a-zA-Z0-9]*@aub.edu.lb")
+        return test.evaluate(with: email)
     }
     
     func isFacultyValid(_faculty: String) -> Bool {
@@ -30,8 +30,13 @@ struct CourseViewModel: Identifiable {
         return test.evaluate(with: faculty)
     }
     
-    var isAddCourseComplete: Bool {
-        if  !isCodeValid(_code: code) ||
+    func isOfficeHValid(_officeHours: String) -> Bool {
+        let test = NSPredicate(format: "SELF MATCHES %@", "[A-Z]{0,5}[\\s][0-9][-][0-9]")
+        return test.evaluate(with: officeHours)
+    }
+    
+    var isAddProfessorComplete: Bool {
+        if  !isEmailValid(_email: email) ||
             isEmpty(_field: name) ||
             !isFacultyValid(_faculty: faculty){
             return false
@@ -43,15 +48,15 @@ struct CourseViewModel: Identifiable {
         if !isEmpty(_field: name) {
             return ""
         } else {
-            return "Enter a valid course name (eg. Introduction to Programming)"
+            return "Enter a valid professor name (eg. Saeed Raheel)"
         }
     }
         
-    var validCodeText: String {
-        if isCodeValid(_code: code) {
+    var validEmailText: String {
+        if isEmailValid(_email: email) {
             return ""
         } else {
-            return "Enter a valid code (eg. CMPS200)"
+            return "Enter a valid email (eg. sr47@aub.edu.lb)"
         }
     }
     
@@ -71,11 +76,11 @@ struct CourseViewModel: Identifiable {
         }
     }
     
-    var validDescriptionText: String {
-        if !isEmpty(_field: description) {
+    var validOfficeHText: String {
+        if isOfficeHValid(_officeHours: officeHours) {
             return ""
         } else {
-            return "Enter a valid course description."
+            return "Enter a valid office hourse (eg. MW 3-4)"
         }
     }
 }

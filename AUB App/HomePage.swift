@@ -90,15 +90,11 @@ struct MainView: View {
             {
                 Text("All Courses")
             }
-            NavigationLink(destination: AllCoursesPage())
+            NavigationLink(destination: AllProfessorsPage())
             {
                 Text("All Professors")
             }
-            NavigationLink(destination: AllCoursesPage())
-            {
-                Text("My Courses")
-            }
-            NavigationLink(destination: AllCoursesPage())
+            NavigationLink(destination: CurrentCoursesPage())
             {
                 Text("Current Courses")
             }

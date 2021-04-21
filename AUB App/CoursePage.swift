@@ -13,48 +13,85 @@ import SwiftUI
 struct CoursePage: View {
     @State var course: CourseViewModel = CourseViewModel()
     @EnvironmentObject var userInfo: UserInfo
-    
     @State private var isStarred: Bool = false
-    @State private var rating = 0
+    @State private var isCurrent: Bool = false
+    @State private var rate = false
+    @State private var courserating = 0
+    @State private var myrating = 0
     let verticalPaddingForForm = 120.0
     
     
     var body: some View {
             VStack(alignment: .center, spacing: 0.0) {
-                HStack {
-                    
+                VStack {
+                    HStack {
+                        Button(action: {
+                            isCurrent.toggle()
+                            if(isCurrent) {
+                                Firestore.firestore().collection("current").document(userInfo.user.email)
+                                    .collection("mycourses").document(course.code)
+                                    .setData(["code" : course.code,
+                                              "name" : course.name,
+                                              "description" : course.description,
+                                              "department" : course.department,
+                                              "faculty" : course.faculty])
+                            }
+                            if(!isCurrent) {
+                                Firestore.firestore().collection("current").document(userInfo.user.email)
+                                    .collection("mycourses").document(course.code)
+                                    .delete()
+                            }
+                        })
+                        {
+                            Text("Current")
+                                .padding(5)
+                                .font(.custom("Helvetica Neue", size: 20))
+                                .foregroundColor(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black)
+                                .overlay(
+                                    Capsule()
+                                        .stroke(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black, lineWidth: 2)
+                                )
+                        }.padding(.leading)
+                        Spacer()
+                        HStack {
+                            Button(action: {
+                                isStarred.toggle()
+                                if(isStarred) {
+                                    Firestore.firestore().collection("starred").document(userInfo.user.email)
+                                        .collection("mycourses").document(course.code)
+                                        .setData(["code" : course.code,
+                                                  "name" : course.name,
+                                                  "description" : course.description,
+                                                  "department" : course.department,
+                                                  "faculty" : course.faculty])
+                                }
+                                if(!isStarred) {
+                                    Firestore.firestore().collection("starred").document(userInfo.user.email)
+                                        .collection("mycourses").document(course.code)
+                                        .delete()
+                                }
+                            })
+                            {
+                                Image(systemName: isStarred ? "star.fill" : "star")
+                                    .font(.title)
+                                    .foregroundColor(isStarred ? Color(red: 0.4, green: 0.8, blue:8) : .black)
+                            }.padding(5)
+                            Button(action: {})
+                            {
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                            }.padding(5)
+                        }
+                    }.padding(.top, -60)
                     Button(action: {
-                        isStarred = !isStarred
-                        if(isStarred) {
-                            Firestore.firestore().collection("starred").document(userInfo.user.email)
-                                .collection("mycourses").document(course.code)
-                                .setData(["code" : course.code,
-                                          "name" : course.name,
-                                          "description" : course.description,
-                                          "department" : course.department,
-                                          "faculty" : course.faculty])
-                        }
-                        if(!isStarred) {
-                            Firestore.firestore().collection("starred").document(userInfo.user.email)
-                                .collection("mycourses").document(course.code)
-                                .delete()
-                        }
-                    })
-                    {
-                        Image(systemName: isStarred ? "star.fill" : "star")
-                            .font(.title)
-                            .foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
-                    }.padding(.leading)
-                    Spacer()
-                    RatingView(rating: $rating)
-                    Spacer()
-                    Button(action: {})
-                    {
-                        Image(systemName: "square.and.arrow.up")
-                            .font(.title)
-                            .foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
-                    }.padding(.trailing)
-                }.padding(.top, -60)
+                        self.rate = true
+                    }) {
+                        RatingView(rating: $courserating)
+                            .disabled(true)
+                    }
+                    
+                }
                         
                 Text("\(course.description)")
                 .frame(width: 380, height: 330)
@@ -63,7 +100,7 @@ struct CoursePage: View {
                 
                 HStack {
                     VStack {
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Button(action: {}) {
                             VStack{
                                 Text("Syllabus")
                                     .fixedSize(horizontal: false, vertical: true)
@@ -119,7 +156,7 @@ struct CoursePage: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(10)
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Button(action: {}) {
                             VStack {
                                 Text("Professors")
                                     .fixedSize(horizontal: false, vertical: true)
@@ -139,15 +176,21 @@ struct CoursePage: View {
                     }
                 }
             }.navigationTitle("\(course.name)")
-            .onAppear() {
-                checkDoc(email : userInfo.user.email, code : course.code)
-            }
+//             .alert(isPresented: $rate) {
+//               Alert(title: Text("Error adding course"),
+//                     message: Text("rate \(RatingView(rating: $myrating))"),
+//                     dismissButton: .default(Text("OK"))
+//               )
+//             }
+             .onAppear() {
+                checkDoc()
+             }
         }
     
-    func checkDoc(email : String, code : String) {
+    func checkDoc() {
         Firestore.firestore().collection("starred")
-            .document(email).collection("mycourses")
-            .document(code).getDocument { (document, error) in
+            .document(userInfo.user.email).collection("mycourses")
+            .document(course.code).getDocument { (document, error) in
                 if let document = document {
                     if document.exists {
                         self.isStarred = true
@@ -156,12 +199,20 @@ struct CoursePage: View {
                     }
             }
         }
+        Firestore.firestore().collection("current")
+            .document(userInfo.user.email).collection("mycourses")
+            .document(course.code).getDocument { (document, error) in
+                if let document = document {
+                    if document.exists {
+                        self.isCurrent = true
+                    } else {
+                        self.isCurrent = false
+                    }
+            }
+        }
     }
     
 }
-
-
-
 
 struct CoursePage_Previews: PreviewProvider {
     static var previews: some View {

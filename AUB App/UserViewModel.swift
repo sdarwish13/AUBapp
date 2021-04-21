@@ -23,16 +23,12 @@ struct UserViewModel {
     }
     
     func isEmailValid(_email: String) -> Bool {
-        // Password must be 8 chars, contain a capital letter and a number
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@",
-                                       "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@mail.aub.edu")
         return passwordTest.evaluate(with: email)
     }
     
     func isPasswordValid(_password: String) -> Bool {
-        // Password must be 8 chars, contain a capital letter and a number
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@",
-                                       "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
         return passwordTest.evaluate(with: password)
     }
     
@@ -58,7 +54,7 @@ struct UserViewModel {
         if !isEmpty(_field: fullname) {
             return ""
         } else {
-            return "Enter your full name"
+            return "Enter your full name."
         }
     }
         
@@ -66,7 +62,7 @@ struct UserViewModel {
         if isEmailValid(_email: email) {
             return ""
         } else {
-            return "Enter a valid email address"
+            return "Enter your aub email address (eg. xxx00@mail.aub.edu)"
         }
     }
     

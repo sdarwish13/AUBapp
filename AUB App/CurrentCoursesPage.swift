@@ -1,17 +1,17 @@
 //
-//  StarredCoursesPage.swift
+//  CurrentCoursesPage.swift
 //  AUB App
 //
-//  Created by Sara Darwish  on 16/04/2021.
+//  Created by Sara Darwish  on 19/04/2021.
 //
 
 import SwiftUI
 import Firebase
 
-struct StarredCoursesPage: View {
+struct CurrentCoursesPage: View {
     @State private var showingSheet = false
     @State private var searchText : String = ""
-    @ObservedObject private var viewModel = StarredCoursesViewModel()
+    @ObservedObject private var viewModel = CurrentCoursesViewModel()
     
     var body: some View {
         VStack {
@@ -47,10 +47,8 @@ struct StarredCoursesPage: View {
     }
 }
 
-struct StarredCoursesPage_Previews: PreviewProvider {
+struct CurrentCoursesPage_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
-        StarredCoursesPage()
-        }
+        CurrentCoursesPage()
     }
 }

@@ -16,10 +16,9 @@ struct AUB_AppApp: App {
       }
     
     var body: some Scene {
-        var userInfo = UserInfo()
+        let userInfo = UserInfo()
         WindowGroup {
             ContentView().environmentObject(userInfo)
-//            AllCoursesPage(courses: testData)
         }
     }
 }

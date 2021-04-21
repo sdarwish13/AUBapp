@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DocumentsPage: View {
     var documents: [Document] = []
+    @State var course: CourseViewModel = CourseViewModel()
     
     var body: some View {
         VStack {

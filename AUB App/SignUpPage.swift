@@ -120,10 +120,9 @@ struct SignUpPage: View {
                 Alert(title: Text("Error creating account"), message: Text(self.errorString), dismissButton: .default(Text("OK")))
             }
              .navigationBarTitle("Sign Up", displayMode: .inline)
-             .navigationBarItems(trailing: Button("Dismiss") {
+             .navigationBarItems(trailing: Button("Cancel") {
                 self.presentationMode.wrappedValue.dismiss()
              })
-            
         }
     }
 }

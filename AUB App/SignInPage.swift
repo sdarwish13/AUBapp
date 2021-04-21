@@ -83,6 +83,7 @@ struct SignInPage: View {
                     Button(action: {
                         self.showSheet = true
                         self.action = .signUp
+                        print(self.showSheet)
                         
                     }) {
                         Text("Sign up")
