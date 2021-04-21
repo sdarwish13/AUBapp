@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 
 struct CourseReview: View {
@@ -27,7 +28,7 @@ struct CourseReview: View {
                     if( course.code == review.courseCode){
                     HStack(spacing:0){
                         Button(action: {
-                            print("Delete button tapped!")
+                            print("!")
                         }) {
                             Image(systemName: "person.circle")
                                 .font(.largeTitle)
@@ -35,18 +36,47 @@ struct CourseReview: View {
 //                                .padding(.leading, 5)
                         }
                         VStack(alignment: .leading){
-                            Text(review.name)
-                                .bold()
-//                                .padding(.leading,5)
-                                .padding(.bottom, 3) // bottom padding
-//                                .padding(.leading, 5)  //left padding
+                            HStack{
+                                Text(review.name)
+                                    .bold()
+    //                                .padding(.leading,5)
+                                    .padding(.bottom, 3) // bottom padding
+    //                                .padding(.leading, 5)  //left padding
+                                Spacer()
+                                
+                                Text(review.timeDate)
+                                    .foregroundColor(Color.gray)
+                                    
+                                
+                            }
+                            HStack{
+                                Text(review.review)
+                                    .padding(.leading, 5)  //left padding
+                                Spacer()
+                                
+                                if(review.email == userInfo.user.email ){
+                                    Button(action: {
+                                        Firestore.firestore().collection("courseReview")
+                                            .document(review.id)
+                                            .delete()
+                                        print("deleted review")
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .font(.subheadline)
+                                            .foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
+                                            .padding(.leading, 10)
+                                    }
+                                }
+                                
+                            }
                            
-                            
-                            Text(review.review)
-                                .padding(.leading, 5)  //left padding
+                    
                         }
-
+                    
+              
+         
                         Spacer()
+                        
                     }
                     }
              
@@ -73,10 +103,10 @@ struct CourseReview: View {
                 {return}
                 let date = Date()
                 let format = DateFormatter()
-                format.dateFormat = "dd-MM-yyyy HH:mm:ss"
+                format.dateFormat = "dd-MM-yyyy"
                 let timestamp = format.string(from: date)
                 
-                FBFirestore.addReview(name: userInfo.user.name, email: userInfo.user.email, review: text, timeDate: timestamp, code: course.code){ (result) in
+                FBFirestore.addReview(id: UUID().uuidString, name: userInfo.user.name, email: userInfo.user.email, review: text, timeDate: timestamp, code: course.code){ (result) in
                         switch result {
                         case .failure(let error):
                                 self.errorString = error.localizedDescription

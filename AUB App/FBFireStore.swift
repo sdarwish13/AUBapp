@@ -85,12 +85,13 @@ enum FBFirestore {
         }
     }
     
-    static func addReview(name: String, email: String, review: String, timeDate: String, code: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+    static func addReview(id: String, name: String, email: String, review: String, timeDate: String, code: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         let reference = Firestore.firestore()
             .collection("courseReview")
-            .document()
+            .document(id)
             reference
             .setData([
+                "id": id,
                 "name" : name,
                 "email" : email,
                 "courseCode" : code,

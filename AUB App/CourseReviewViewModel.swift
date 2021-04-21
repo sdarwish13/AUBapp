@@ -26,12 +26,13 @@ class CourseReviewViewModel: ObservableObject {
             
             self.reviews = documents.map { (queryDocumentSnapshot) -> ReviewViewModel in
                 let data = queryDocumentSnapshot.data()
+                let id = data["id"] as? String ?? ""
                 let name = data["name"] as? String ?? ""
                 let review = data["review"] as? String ?? ""
                 let email = data["email"] as? String ?? ""
                 let courseCode = data["courseCode"] as? String ?? ""
                 let timeDate = data["timeDate"] as? String ?? ""
-                return ReviewViewModel( email: email, name: name, courseCode: courseCode, review: review, timeDate: timeDate)
+                return ReviewViewModel( id: id, email: email, name: name, courseCode: courseCode, review: review, timeDate: timeDate)
             }
         }
     }
