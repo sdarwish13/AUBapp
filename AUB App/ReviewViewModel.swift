@@ -9,8 +9,11 @@ import Foundation
 
 struct ReviewViewModel: Identifiable {
     var id: String = UUID().uuidString
+    var email: String = ""
+    var name: String = ""
     var courseCode: String = ""
     var review: String = ""
     var timeDate: String = ""
+    
 
 }

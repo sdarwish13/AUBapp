@@ -15,20 +15,23 @@ class CourseReviewViewModel: ObservableObject {
     private var db = Firestore.firestore()
 
     func fetchData() {
-        db.collection("courseReviews")
-            .document(Auth.auth().currentUser?.email ?? "").collection("myreviews").addSnapshotListener { (querySnapshot, error) in
+        db.collection("courseReview").order(by: "timeDate",descending: true)
+           .addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
+                
             }
+          
             
             self.reviews = documents.map { (queryDocumentSnapshot) -> ReviewViewModel in
                 let data = queryDocumentSnapshot.data()
-                //email
+                let name = data["name"] as? String ?? ""
                 let review = data["review"] as? String ?? ""
+                let email = data["email"] as? String ?? ""
                 let courseCode = data["courseCode"] as? String ?? ""
                 let timeDate = data["timeDate"] as? String ?? ""
-                return ReviewViewModel(courseCode: courseCode, review: review, timeDate: timeDate)
+                return ReviewViewModel( email: email, name: name, courseCode: courseCode, review: review, timeDate: timeDate)
             }
         }
     }

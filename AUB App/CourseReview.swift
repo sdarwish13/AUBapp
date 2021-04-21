@@ -22,10 +22,9 @@ struct CourseReview: View {
     
  
     var body: some View {
-        NavigationView {
+        
             List {
                 ForEach(viewModel.reviews){ review in
-                    
                     if( course.code == review.courseCode){
                     HStack(spacing:0){
                         Button(action: {
@@ -37,9 +36,9 @@ struct CourseReview: View {
 //                                .padding(.leading, 5)
                         }
                         VStack{
-                            Text(userInfo.user.name)
+                            Text(review.name)
                                 .bold()
-                                .padding(.leading,5)
+//                                .padding(.leading,5)
                                 .padding(.bottom, 3) // bottom padding
 //                                .padding(.leading, 5)  //left padding
                            
@@ -60,7 +59,7 @@ struct CourseReview: View {
             }
                 
             
-        }
+        
         VStack {
             TextField("Write a review here", text: $text)
                 .fixedSize(horizontal: false, vertical: true)
@@ -78,7 +77,7 @@ struct CourseReview: View {
                 format.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 let timestamp = format.string(from: date)
                 
-                FBFirestore.addReview(email: userInfo.user.email, review: text, timeDate: timestamp, code: course.code){ (result) in
+                FBFirestore.addReview(name: userInfo.user.name, email: userInfo.user.email, review: text, timeDate: timestamp, code: course.code){ (result) in
                         switch result {
                         case .failure(let error):
                                 self.errorString = error.localizedDescription
