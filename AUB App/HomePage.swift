@@ -103,7 +103,7 @@ struct MainView: View {
                 .foregroundColor(Color.black)
                 .cornerRadius(10)
                 .border(Color(red: 0.4, green: 0.8, blue: 6),width:3)
-                .padding(.bottom, 20)
+                .padding(.bottom, 19)
             
             
                 NavigationLink(destination: CurrentCoursesPage()){
