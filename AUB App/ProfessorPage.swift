@@ -2,7 +2,7 @@
 //  ProfessorPage.swift
 //  AUB App
 //
-//  Created by Ghina Kamal on 25/02/2021.
+//  Created by Ghina Kamal and Sara Darwish on 25/02/2021.
 //
 
 
