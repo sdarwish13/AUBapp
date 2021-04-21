@@ -22,7 +22,6 @@ struct CourseReview: View {
     
  
     var body: some View {
-        
             List {
                 ForEach(viewModel.reviews){ review in
                     if( course.code == review.courseCode){
@@ -35,7 +34,7 @@ struct CourseReview: View {
                                 .foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
 //                                .padding(.leading, 5)
                         }
-                        VStack{
+                        VStack(alignment: .leading){
                             Text(review.name)
                                 .bold()
 //                                .padding(.leading,5)
