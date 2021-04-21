@@ -103,5 +103,25 @@ enum FBFirestore {
             completion(.success(true))
         }
     }
+    
+    static func addProfessor(email: String, name: String, department: String, officeHours: String, faculty: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+        let reference = Firestore
+            .firestore()
+            .collection("professors")
+            .document(email)
+        
+        reference.setData([
+            "name": name,
+            "email": email,
+            "officeHours": officeHours,
+            "department": department,
+            "faculty": faculty]) { (err) in
+            if let err = err {
+                completion(.failure(err))
+                return
+            }
+            completion(.success(true))
+        }
+    }
 
 }
