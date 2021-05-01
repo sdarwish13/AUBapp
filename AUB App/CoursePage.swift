@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 import SwiftUI
 
 
@@ -22,15 +23,44 @@ struct CoursePage: View {
     
     
     var body: some View {
-            VStack(alignment: .center, spacing: 0.0) {
-                VStack {
-                    Text("\(course.name)").bold().foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
-                        .font(.title2)
+        VStack(alignment: .center, spacing: 0.0) {
+            VStack {
+                Text("\(course.name)").bold().foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
+                    .font(.title2)
+                HStack {
+                    Button(action: {
+                        isCurrent.toggle()
+                        if(isCurrent) {
+                            Firestore.firestore().collection("current").document(userInfo.user.email)
+                                .collection("mycourses").document(course.code)
+                                .setData(["code" : course.code,
+                                          "name" : course.name,
+                                          "description" : course.description,
+                                          "department" : course.department,
+                                          "faculty" : course.faculty])
+                        }
+                        if(!isCurrent) {
+                            Firestore.firestore().collection("current").document(userInfo.user.email)
+                                .collection("mycourses").document(course.code)
+                                .delete()
+                        }
+                    })
+                    {
+                        Text("Current")
+                            .padding(5)
+                            .font(.custom("Helvetica Neue", size: 20))
+                            .foregroundColor(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black)
+                            .overlay(
+                                Capsule()
+                                    .stroke(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black, lineWidth: 2)
+                            )
+                    }.padding(.leading)
+                    Spacer()
                     HStack {
                         Button(action: {
-                            isCurrent.toggle()
-                            if(isCurrent) {
-                                Firestore.firestore().collection("current").document(userInfo.user.email)
+                            isStarred.toggle()
+                            if(isStarred) {
+                                Firestore.firestore().collection("starred").document(userInfo.user.email)
                                     .collection("mycourses").document(course.code)
                                     .setData(["code" : course.code,
                                               "name" : course.name,
@@ -38,159 +68,130 @@ struct CoursePage: View {
                                               "department" : course.department,
                                               "faculty" : course.faculty])
                             }
-                            if(!isCurrent) {
-                                Firestore.firestore().collection("current").document(userInfo.user.email)
+                            if(!isStarred) {
+                                Firestore.firestore().collection("starred").document(userInfo.user.email)
                                     .collection("mycourses").document(course.code)
                                     .delete()
                             }
                         })
                         {
-                            Text("Current")
-                                .padding(5)
-                                .font(.custom("Helvetica Neue", size: 20))
-                                .foregroundColor(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black)
-                                .overlay(
-                                    Capsule()
-                                        .stroke(isCurrent ? Color(red: 0.4, green: 0.8, blue:8) : .black, lineWidth: 2)
-                                )
-                        }.padding(.leading)
-                        Spacer()
-                        HStack {
-                            Button(action: {
-                                isStarred.toggle()
-                                if(isStarred) {
-                                    Firestore.firestore().collection("starred").document(userInfo.user.email)
-                                        .collection("mycourses").document(course.code)
-                                        .setData(["code" : course.code,
-                                                  "name" : course.name,
-                                                  "description" : course.description,
-                                                  "department" : course.department,
-                                                  "faculty" : course.faculty])
-                                }
-                                if(!isStarred) {
-                                    Firestore.firestore().collection("starred").document(userInfo.user.email)
-                                        .collection("mycourses").document(course.code)
-                                        .delete()
-                                }
-                            })
-                            {
-                                Image(systemName: isStarred ? "star.fill" : "star")
-                                    .font(.title)
-                                    .foregroundColor(isStarred ? Color(red: 0.4, green: 0.8, blue:8) : .black)
-                            }.padding(5)
-                        }
+                            Image(systemName: isStarred ? "star.fill" : "star")
+                                .font(.title)
+                                .foregroundColor(isStarred ? Color(red: 0.4, green: 0.8, blue:8) : .black)
+                        }.padding(5)
                     }
-                    Button(action: {
-                        withAnimation { self.rate = !self.rate }
-                    }) {
-                        RatingView(rating: $courserating)
-                            .disabled(true)
-                    }.overlay(
-                        RatingView(rating: $myrating)
-                            .padding(.all, 12)
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
-                            .offset(x: 0, y: -40)
-                            .opacity(rate ? 1.0 : 0)
-                    
-                    )
-                    
                 }
-                        
-                Text("\(course.description)")
-                .frame(width: 380, height: 330)
-                .fixedSize(horizontal: false, vertical: true)
-                .font(.custom("Helvetica Neue", size: 19))
+                Button(action: {
+                    withAnimation { self.rate = !self.rate }
+                }) {
+                    RatingView(rating: $courserating)
+                        .disabled(true)
+                }.overlay(
+                    RatingView(rating: $myrating)
+                        .padding(.all, 12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
+                        .offset(x: 0, y: -40)
+                        .opacity(rate ? 1.0 : 0)
                 
-                HStack {
-                    VStack {
-                        Button(action: {}) {
-                            VStack{
-                                Text("Syllabus")
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding()
-                                    .font(.custom("Helvetica Neue", size: 21))
-                                
-                                Image(systemName: "chevron.right.circle")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .padding(.bottom)
-                            }
+                )
+                
+            }
+                    
+            Text("\(course.description)")
+            .frame(width: 380, height: 330)
+            .fixedSize(horizontal: false, vertical: true)
+            .font(.custom("Helvetica Neue", size: 19))
+            
+            HStack {
+                VStack {
+                    Button(action: {}) {
+                        VStack{
+                            Text("Syllabus")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding()
+                                .font(.custom("Helvetica Neue", size: 21))
+                            
+                            Image(systemName: "chevron.right.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding(.bottom)
                         }
-                        .frame(width: 180, height: 110)
-                        .background(Color(red: 0.4, green: 0.8, blue: 6))
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
-                        
-                        NavigationLink(destination: DocumentsPage()) {
-                            VStack{
-                                Text("Documents")
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding()
-                                    .font(.custom("Helvetica Neue", size: 21))
-                                
-                                Image(systemName: "chevron.right.circle")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .padding(.bottom)
-                            }
-                        }
-                        .frame(width: 180, height: 110)
-                        .background(Color(red: 0.4, green: 0.8, blue: 6))
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
                     }
-                    VStack{
-                        NavigationLink(destination: CourseReview(course : course)) {
-                            VStack{
-                        
-                                Text("Reviews")
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding()
-                                    .font(.custom("Helvetica Neue", size: 21))
-                                
-                                Image(systemName: "chevron.right.circle")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .padding(.bottom)
-                            }
+                    .frame(width: 180, height: 110)
+                    .background(Color(red: 0.4, green: 0.8, blue: 6))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    
+                    NavigationLink(destination: DocumentsPage()) {
+                        VStack{
+                            Text("Documents")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding()
+                                .font(.custom("Helvetica Neue", size: 21))
+                            
+                            Image(systemName: "chevron.right.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding(.bottom)
                         }
-                        .frame(width: 180, height: 110)
-                        .background(Color(red: 0.4, green: 0.8, blue: 6))
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
-                        
-                        Button(action: {}) {
-                            VStack {
-                                Text("Professors")
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .padding()
-                                    .font(.custom("Helvetica Neue", size: 21))
-                                
-                                Image(systemName: "chevron.right.circle")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .padding(.bottom)
-                            }
-                        }
-                        .frame(width: 180, height: 110)
-                        .background(Color(red: 0.4, green: 0.8, blue: 6))
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
                     }
+                    .frame(width: 180, height: 110)
+                    .background(Color(red: 0.4, green: 0.8, blue: 6))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
                 }
-            }.navigationTitle("\(course.code)")
+                VStack{
+                    NavigationLink(destination: CourseReview(course : course)) {
+                        VStack{
+                    
+                            Text("Reviews")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding()
+                                .font(.custom("Helvetica Neue", size: 21))
+                            
+                            Image(systemName: "chevron.right.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding(.bottom)
+                        }
+                    }
+                    .frame(width: 180, height: 110)
+                    .background(Color(red: 0.4, green: 0.8, blue: 6))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    
+                    Button(action: {}) {
+                        VStack {
+                            Text("Professors")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding()
+                                .font(.custom("Helvetica Neue", size: 21))
+                            
+                            Image(systemName: "chevron.right.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding(.bottom)
+                        }
+                    }
+                    .frame(width: 180, height: 110)
+                    .background(Color(red: 0.4, green: 0.8, blue: 6))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                }
+            }
+        }.navigationTitle("\(course.code)")
 //             .alert(isPresented: $rate) {
 //               Alert(title: Text("Error adding course"),
 //                     message: Text("rate \(RatingView(rating: $myrating))"),
 //                     dismissButton: .default(Text("OK"))
 //               )
 //             }
-             .onAppear() {
-                checkDoc()
-             }
-        }
+         .onAppear() {
+            checkDoc()
+         }
+    }
     
     func checkDoc() {
         Firestore.firestore().collection("starred")

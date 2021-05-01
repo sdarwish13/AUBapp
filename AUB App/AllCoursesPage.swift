@@ -143,6 +143,7 @@ struct AllCoursesPage: View {
             }
         }
     }
+
     
     func checkboxSelected(id: String, isMarked: Bool) {
         if(id == "Name") {

@@ -11,7 +11,6 @@ struct AddProfessor: View {
     @State var professor: ProfessorViewModel = ProfessorViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var showError = false
-    @State private var showSuccess = false
     @State private var errorString = ""
     let verticalPaddingForForm = 40.0
     
@@ -95,7 +94,6 @@ struct AddProfessor: View {
                                 self.errorString = error.localizedDescription
                                 self.showError = true
                             case .success( _):
-                                self.showSuccess = true
                                 print("Professor Created Successfully")
                             }
                         }
@@ -121,10 +119,9 @@ struct AddProfessor: View {
              }
              .navigationBarTitle("Add Professor", displayMode: .inline)
              .navigationBarItems(trailing: Button("Cancel") {
-               self.presentationMode.wrappedValue.dismiss()
+                self.presentationMode.wrappedValue.dismiss()
              })
         }
-        
     }
 }
 
