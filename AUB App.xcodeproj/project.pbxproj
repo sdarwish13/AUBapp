@@ -32,6 +32,7 @@
 		567F20FB262B6EE000BEE7AF /* ProfessorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F20FA262B6EE000BEE7AF /* ProfessorPage.swift */; };
 		567F2102262CD60200BEE7AF /* CurrentCoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F2101262CD60200BEE7AF /* CurrentCoursesViewModel.swift */; };
 		567F2105262CD65600BEE7AF /* CurrentCoursesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F2104262CD65600BEE7AF /* CurrentCoursesPage.swift */; };
+		5684982D2634C0C400E988DB /* CourseProfessorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684982C2634C0C400E988DB /* CourseProfessorsList.swift */; };
 		5687D00F25E7F5260090561D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D00E25E7F5260090561D /* SearchBar.swift */; };
 		5687D01225E829890090561D /* DocumentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D01125E829890090561D /* DocumentsPage.swift */; };
 		5687D01525E82A920090561D /* Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687D01425E82A920090561D /* Documents.swift */; };
@@ -79,6 +80,7 @@
 		567F20FA262B6EE000BEE7AF /* ProfessorPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessorPage.swift; sourceTree = "<group>"; };
 		567F2101262CD60200BEE7AF /* CurrentCoursesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCoursesViewModel.swift; sourceTree = "<group>"; };
 		567F2104262CD65600BEE7AF /* CurrentCoursesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCoursesPage.swift; sourceTree = "<group>"; };
+		5684982C2634C0C400E988DB /* CourseProfessorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProfessorsList.swift; sourceTree = "<group>"; };
 		5687D00E25E7F5260090561D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5687D01125E829890090561D /* DocumentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsPage.swift; sourceTree = "<group>"; };
 		5687D01425E82A920090561D /* Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Documents.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				5677BFA72611D1E8003FA00C /* AddCourse.swift */,
 				567F20F3262B5D4E00BEE7AF /* AddProfessor.swift */,
 				560DC65726027C47007D1300 /* CoursePage.swift */,
+				5684982C2634C0C400E988DB /* CourseProfessorsList.swift */,
 				567F20FA262B6EE000BEE7AF /* ProfessorPage.swift */,
 				D5CC04D6262AC72A00304A94 /* CourseReview.swift */,
 				567F20E4262A0B6800BEE7AF /* StarredCoursesPage.swift */,
@@ -337,6 +340,7 @@
 				567F20E5262A0B6800BEE7AF /* StarredCoursesPage.swift in Sources */,
 				567F2105262CD65600BEE7AF /* CurrentCoursesPage.swift in Sources */,
 				565B55892603901400894858 /* UserInfo.swift in Sources */,
+				5684982D2634C0C400E988DB /* CourseProfessorsList.swift in Sources */,
 				565B55902604910000894858 /* UserViewModel.swift in Sources */,
 				567F20EE262B59B300BEE7AF /* ProfessorViewModel.swift in Sources */,
 				5687D01525E82A920090561D /* Documents.swift in Sources */,

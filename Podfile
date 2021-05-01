@@ -11,6 +11,7 @@ target 'AUB App' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift'
 
 end

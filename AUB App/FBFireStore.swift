@@ -124,5 +124,9 @@ enum FBFirestore {
             completion(.success(true))
         }
     }
+    
+    static func addRate() {
+        
+    }
 
 }

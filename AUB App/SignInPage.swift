@@ -2,7 +2,7 @@
 //  SignInPage.swift
 //  AUB App
 //
-//  Created by Ghina Kamal on 17/02/2021.
+//  Created by Ghina Kamal and Sara Darwish on 17/02/2021.
 //
 
 import SwiftUI

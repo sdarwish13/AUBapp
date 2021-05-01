@@ -24,6 +24,8 @@ struct CoursePage: View {
     var body: some View {
             VStack(alignment: .center, spacing: 0.0) {
                 VStack {
+                    Text("\(course.name)").bold().foregroundColor(Color(red: 0.4, green: 0.8, blue:8))
+                        .font(.title2)
                     HStack {
                         Button(action: {
                             isCurrent.toggle()
@@ -76,20 +78,23 @@ struct CoursePage: View {
                                     .font(.title)
                                     .foregroundColor(isStarred ? Color(red: 0.4, green: 0.8, blue:8) : .black)
                             }.padding(5)
-                            Button(action: {})
-                            {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.title)
-                                    .foregroundColor(.black)
-                            }.padding(5)
                         }
-                    }.padding(.top, -60)
+                    }
                     Button(action: {
-                        self.rate = true
+                        withAnimation { self.rate = !self.rate }
                     }) {
                         RatingView(rating: $courserating)
                             .disabled(true)
-                    }
+                    }.overlay(
+                        RatingView(rating: $myrating)
+                            .padding(.all, 12)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
+                            .offset(x: 0, y: -40)
+                            .opacity(rate ? 1.0 : 0)
+                    
+                    )
                     
                 }
                         
@@ -175,7 +180,7 @@ struct CoursePage: View {
                         .cornerRadius(10)
                     }
                 }
-            }.navigationTitle("\(course.name)")
+            }.navigationTitle("\(course.code)")
 //             .alert(isPresented: $rate) {
 //               Alert(title: Text("Error adding course"),
 //                     message: Text("rate \(RatingView(rating: $myrating))"),

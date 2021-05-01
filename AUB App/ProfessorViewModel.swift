@@ -31,14 +31,15 @@ struct ProfessorViewModel: Identifiable {
     }
     
     func isOfficeHValid(_officeHours: String) -> Bool {
-        let test = NSPredicate(format: "SELF MATCHES %@", "[A-Z]{0,5}[\\s][0-9][-][0-9]")
+        let test = NSPredicate(format: "SELF MATCHES %@", "[A-Z]{1,5} [0-9]{1,2}-[0-9]{1,2}")
         return test.evaluate(with: officeHours)
     }
     
     var isAddProfessorComplete: Bool {
         if  !isEmailValid(_email: email) ||
             isEmpty(_field: name) ||
-            !isFacultyValid(_faculty: faculty){
+            !isFacultyValid(_faculty: faculty) ||
+            !isOfficeHValid(_officeHours: officeHours){
             return false
         }
         return true
