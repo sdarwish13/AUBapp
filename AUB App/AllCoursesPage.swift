@@ -63,7 +63,7 @@ struct AllCoursesPage: View {
                     }
                 }.navigationTitle("All Courses")
                 .onAppear() {
-                    self.viewModel.fetchData()
+                    self.viewModel.limitFetch()
                 }
                 .toolbar {
                    ToolbarItemGroup(placement: .bottomBar) {

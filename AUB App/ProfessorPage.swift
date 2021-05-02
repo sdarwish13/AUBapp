@@ -70,7 +70,7 @@ struct ProfessorPage: View {
             }
             Spacer()
             HStack {
-                Button(action: {}) {
+                NavigationLink(destination: CourseProfessorsList(professor: professor)) {
                     VStack {
                         Text("Courses")
                             .fixedSize(horizontal: false, vertical: true)

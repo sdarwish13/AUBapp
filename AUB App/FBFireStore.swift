@@ -46,7 +46,6 @@ enum FBFirestore {
         }
     }
     
-    
     fileprivate static func getDocument(for reference: DocumentReference, completion: @escaping (Result<[String : Any], Error>) -> ()) {
         reference.getDocument { (documentSnapshot, err) in
             if let err = err {
@@ -124,6 +123,25 @@ enum FBFirestore {
             completion(.success(true))
         }
     }
+    
+    static func addCourseProf(id: String, profMail: String, courseCode: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+        let reference = Firestore
+            .firestore()
+            .collection("courseprof")
+            .document(id)
+        
+        reference.setData([
+            "id": id,
+            "profMail": profMail,
+            "courseCode": courseCode]) { (err) in
+            if let err = err {
+                completion(.failure(err))
+                return
+            }
+            completion(.success(true))
+        }
+    }
+
     
     static func addRate() {
         

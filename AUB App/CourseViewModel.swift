@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct CourseViewModel: Identifiable {
     var id: String = UUID().uuidString

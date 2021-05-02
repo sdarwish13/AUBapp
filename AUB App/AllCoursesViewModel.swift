@@ -31,5 +31,24 @@ class AllCoursesViewModel: ObservableObject {
             }
         }
     }
+    
+    func limitFetch() {
+        db.collection("courses").limit(to: 10).addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.courses = documents.map { (queryDocumentSnapshot) -> CourseViewModel in
+                let data = queryDocumentSnapshot.data()
+                let name = data["name"] as? String ?? ""
+                let code = data["code"] as? String ?? ""
+                let department = data["department"] as? String ?? ""
+                let description = data["description"] as? String ?? ""
+                let faculty = data["faculty"] as? String ?? ""
+                return CourseViewModel(code: code, name: name, description: description, department: department, faculty: faculty)
+            }
+        }
+    }
 
 }
