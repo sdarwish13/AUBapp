@@ -45,19 +45,10 @@ struct AddCourseProfessor: View {
                         ForEach(viewModel.courses) { course in
                             Button(action: {
                                 let id = "\(course.code)\(professor.email)"
-                                Firestore.firestore().collection("courseprof").document("\(course.code)\(professor.email)")
-                                    .getDocument { (document, error) in
-                                        if let document = document {
-                                            if document.exists {
-                                                Firestore.firestore().collection("courseprof").document(id).delete()
-                                            } else {
-                                                Firestore.firestore().collection("courseprof").document(id)
-                                                    .setData(["id" : id,
-                                                              "profmail" : professor.email,
-                                                              "courseCode" : course.code])
-                                            }
-                                    }
-                                }
+                                Firestore.firestore().collection("courseprof").document(id)
+                                    .setData(["id" : id,
+                                              "profmail" : professor.email,
+                                              "courseCode" : course.code])
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 HStack {
@@ -106,19 +97,10 @@ struct AddCourseProfessor: View {
                         }) { course in
                             Button(action: {
                                 let id = "\(course.code)\(professor.email)"
-                                Firestore.firestore().collection("courseprof").document("\(course.code)\(professor.email)")
-                                    .getDocument { (document, error) in
-                                        if let document = document {
-                                            if document.exists {
-                                                Firestore.firestore().collection("courseprof").document(id).delete()
-                                            } else {
-                                                Firestore.firestore().collection("courseprof").document(id)
-                                                    .setData(["id" : id,
-                                                              "profmail" : professor.email,
-                                                              "courseCode" : course.code])
-                                            }
-                                    }
-                                }
+                                Firestore.firestore().collection("courseprof").document(id)
+                                    .setData(["id" : id,
+                                              "profmail" : professor.email,
+                                              "courseCode" : course.code])
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 HStack {
@@ -160,19 +142,6 @@ struct AddCourseProfessor: View {
             checkDept = isMarked
         }
     }
-    
-//    func checkDoc(code: String, exist: Bool) {
-//        Firestore.firestore().collection("courseprof").document("\(code)\(professor.email)")
-//            .getDocument { (document, error) in
-//                if let document = document {
-//                    if document.exists {
-//                        exist = true
-//                    } else {
-//                        exist = false
-//                    }
-//            }
-//        }
-//    }
 }
 
 struct AddCourseProfessor_Previews: PreviewProvider {
