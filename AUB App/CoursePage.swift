@@ -10,12 +10,12 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 
+var isStarred = false
+var isCurrent = false
 
 struct CoursePage: View {
     @State var course: CourseViewModel = CourseViewModel()
     @EnvironmentObject var userInfo: UserInfo
-    @State private var isStarred: Bool = false
-    @State private var isCurrent: Bool = false
     @State private var rate = false
     @State private var courserating = 0
     @State private var myrating = 0
@@ -124,7 +124,7 @@ struct CoursePage: View {
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
                     
-                    NavigationLink(destination: DocumentsPage()) {
+                    NavigationLink(destination: CourseReview(course : course)) {
                         VStack{
                             Text("Documents")
                                 .fixedSize(horizontal: false, vertical: true)
@@ -162,7 +162,7 @@ struct CoursePage: View {
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
                     
-                    Button(action: {}) {
+                    NavigationLink(destination: CourseProfessorsList(course: course)) {
                         VStack {
                             Text("Professors")
                                 .fixedSize(horizontal: false, vertical: true)
@@ -188,36 +188,31 @@ struct CoursePage: View {
 //                     dismissButton: .default(Text("OK"))
 //               )
 //             }
-         .onAppear() {
-            checkDoc()
-         }
-    }
-    
-    func checkDoc() {
-        Firestore.firestore().collection("starred")
-            .document(userInfo.user.email).collection("mycourses")
-            .document(course.code).getDocument { (document, error) in
-                if let document = document {
-                    if document.exists {
-                        self.isStarred = true
-                    } else {
-                        self.isStarred = false
-                    }
+        .onAppear {
+            Firestore.firestore().collection("starred")
+                .document(userInfo.user.email).collection("mycourses")
+                .document(course.code).getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists {
+                            isStarred = true
+                        } else {
+                            isStarred = false
+                        }
+                }
             }
-        }
-        Firestore.firestore().collection("current")
-            .document(userInfo.user.email).collection("mycourses")
-            .document(course.code).getDocument { (document, error) in
-                if let document = document {
-                    if document.exists {
-                        self.isCurrent = true
-                    } else {
-                        self.isCurrent = false
-                    }
+            Firestore.firestore().collection("current")
+                .document(userInfo.user.email).collection("mycourses")
+                .document(course.code).getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists {
+                            isCurrent = true
+                        } else {
+                            isCurrent = false
+                        }
+                }
             }
         }
     }
-    
 }
 
 struct CoursePage_Previews: PreviewProvider {

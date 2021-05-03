@@ -32,4 +32,23 @@ class AllProfessorsViewModel: ObservableObject {
         }
     }
 
+    func limitFetch() {
+        db.collection("professors").limit(to: 10).addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.professors = documents.map { (queryDocumentSnapshot) -> ProfessorViewModel in
+                let data = queryDocumentSnapshot.data()
+                let name = data["name"] as? String ?? ""
+                let email = data["email"] as? String ?? ""
+                let officeHours = data["officeHours"] as? String ?? ""
+                let department = data["department"] as? String ?? ""
+                let faculty = data["faculty"] as? String ?? ""
+                return ProfessorViewModel(name: name, email: email, officeHours: officeHours, department: department, faculty: faculty)
+            }
+        }
+    }
+
 }

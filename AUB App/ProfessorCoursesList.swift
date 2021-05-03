@@ -1,17 +1,17 @@
 //
-//  CourseProfessorsList.swift
+//  ProfessorCoursesList.swift
 //  AUB App
 //
-//  Created by Sara Darwish  on 03/05/2021.
+//  Created by Sara Darwish  on 25/04/2021.
 //
 
 import SwiftUI
 import FirebaseFirestore
 
-struct CourseProfessorsList: View {
+struct ProfessorCoursesList: View {
+    @State var professor: ProfessorViewModel = ProfessorViewModel()
     @State private var showingSheet = false
     @State private var searchText : String = ""
-    @State var course: CourseViewModel = CourseViewModel()
     @ObservedObject private var viewModel = ProfessorCoursesListViewModel()
     
     var body: some View {
@@ -20,15 +20,14 @@ struct CourseProfessorsList: View {
                 List {
                     
                     ForEach(viewModel.courseprofs) { courseprof in
-                        let res = NSPredicate(format: "SELF MATCHES %@","\(course.code)[a-zA-Z0-9]+@aub.edu.lb").evaluate(with: "\(courseprof.id)")
+                        let res = NSPredicate(format: "SELF MATCHES %@","[A-Z]{4}[0-9]{3}[A-Z]?\(professor.email)").evaluate(with: "\(courseprof.id)")
+                        
                         if(res) {
                             HStack {
-                                HStack {
-                                    Text("\(courseprof.profName)")
-                                    Spacer()
-                                }
+                                Text("\(courseprof.courseCode)")
+                                Spacer()
                                 Button(action: {
-                                    Firestore.firestore().collection("courseprof").document("\(courseprof.courseCode)\(courseprof.profMail)").delete()
+                                    Firestore.firestore().collection("courseprof").document("\(courseprof.courseCode)\(professor.email)").delete()
                                 }) {
                                     Image(systemName: "trash")
                                         .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
@@ -49,7 +48,7 @@ struct CourseProfessorsList: View {
                            Image(systemName: "plus")
                                .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
                        }.sheet(isPresented: $showingSheet) {
-                           AddCourseProfessor(course: course)
+                           AddProfessorCourse(professor: professor)
                        }
                    }
                  }
@@ -59,8 +58,8 @@ struct CourseProfessorsList: View {
     }
 }
 
-struct CourseProfessorsList_Previews: PreviewProvider {
+struct ProfessorCoursesList_Previews: PreviewProvider {
     static var previews: some View {
-        CourseProfessorsList()
+        ProfessorCoursesList()
     }
 }

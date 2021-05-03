@@ -27,50 +27,87 @@ struct AllProfessorsPage: View {
             
             
             SearchBar(text: $searchText, placeholder: "Search")
-            Divider()
-            Text("Top 10")
-            Divider()
-            List {
-                ForEach(viewModel.professors.filter { professor in
-                    if(searchText.isEmpty) {
-                        return true
-                    }
-                    return professor.name.lowercased().contains(searchText.lowercased())
-                }) { professor in
-                    NavigationLink(destination: ProfessorPage(professor: professor))
-                    {
-                        VStack {
-                            HStack {
-                                Text("\(professor.name)")
-                                Spacer()
-                            }
-                            HStack {
-                                Text("\(professor.email)")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
-                                Spacer()
+            if(searchText.isEmpty) {
+                Divider()
+                Text("Top 10")
+                Divider()
+                List {
+                    ForEach(viewModel.professors) { professor in
+                        NavigationLink(destination: ProfessorPage(professor: professor))
+                        {
+                            VStack {
+                                HStack {
+                                    Text("\(professor.name)")
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("\(professor.email)")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+                                    Spacer()
+                                }
                             }
                         }
                     }
+                }.navigationTitle("All Professors")
+                .onAppear() {
+                    self.viewModel.limitFetch()
                 }
-            }.navigationTitle("All Professors")
-            .onAppear() {
-                self.viewModel.fetchData()
-            }
-             .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Spacer()
-                    Button(action: {
-                        showingSheet.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                            .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
-                    }.sheet(isPresented: $showingSheet) {
-                        AddProfessor()
+                 .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        Button(action: {
+                            showingSheet.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+                        }.sheet(isPresented: $showingSheet) {
+                            AddProfessor()
+                        }
                     }
+                 }
+                 .listStyle(PlainListStyle())
+            }
+            else {
+                List {
+                    ForEach(viewModel.professors.filter { professor in
+                        return professor.name.lowercased().contains(searchText.lowercased())
+                    }) { professor in
+                        NavigationLink(destination: ProfessorPage(professor: professor))
+                        {
+                            VStack {
+                                HStack {
+                                    Text("\(professor.name)")
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("\(professor.email)")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                }.navigationTitle("All Professors")
+                .onAppear() {
+                    self.viewModel.fetchData()
                 }
-             }
-             .listStyle(PlainListStyle())
+                 .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        Button(action: {
+                            showingSheet.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+                        }.sheet(isPresented: $showingSheet) {
+                            AddProfessor()
+                        }
+                    }
+                 }
+                 .listStyle(PlainListStyle())
+            }
         }
     }
 }
