@@ -15,12 +15,37 @@ var isCurrent = false
 
 struct CoursePage: View {
     @State var course: CourseViewModel = CourseViewModel()
+    @State var ratings: CourseRatingsViewModel = CourseRatingsViewModel()
     @EnvironmentObject var userInfo: UserInfo
-    @State private var rate = false
+    @State var rate = false
     @State private var courserating = 0
-    @State private var myrating = 0
+    @State private var myrating : Int = 0
     let verticalPaddingForForm = 120.0
     
+    var gesture: some Gesture {
+        let updateRating: (CGFloat)->() = { x in
+            let percent = max((x / 110.0), 0.0)
+            self.myrating = min(Int(percent * 5.0) + 1, 5)
+        }
+        return DragGesture(minimumDistance: 0, coordinateSpace: .local)
+        .onChanged({ val in
+            updateRating(val.location.x)
+        })
+        .onEnded { val in
+            updateRating(val.location.x)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    self.rate = false
+                }
+            }
+            Firestore.firestore().collection("courseRating")
+                .document("\(course.code)\(userInfo.user.email)")
+                .setData(["myrating" : self.myrating,
+                          "userEmail" : userInfo.user.email,
+                          "courseCode" : course.code,
+                          "id" : "\(course.code)\(userInfo.user.email)"])
+        }
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0.0) {
@@ -82,21 +107,29 @@ struct CoursePage: View {
                     }
                 }
                 Button(action: {
-                    withAnimation { self.rate = !self.rate }
+                    withAnimation { self.rate.toggle() }
                 }) {
-                    RatingView(rating: $courserating)
-                        .disabled(true)
+                    VStack(alignment: .center, spacing: 8) {
+                        RatingView(filled: myrating > 0)
+                        Text(ratings.ratings.count>0 ? ratings.courseRatings>0 ? "\(ratings.allRatings/ratings.courseRatings)" : "Rate This" : "Rate This")
+                            .foregroundColor(Color.black)
+                            .font(Font.system(size: 11, weight: .semibold, design: .rounded))
+                    }
                 }.overlay(
-                    RatingView(rating: $myrating)
-                        .padding(.all, 12)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
-                        .offset(x: 0, y: -40)
-                        .opacity(rate ? 1.0 : 0)
-                
+                    HStack(alignment: .center, spacing: 4) {
+                        RatingView(filled: myrating > 0)
+                        RatingView(filled: myrating > 1)
+                        RatingView(filled: myrating > 2)
+                        RatingView(filled: myrating > 3)
+                        RatingView(filled: myrating > 4)
+                    }.gesture(gesture)
+                    .padding(.all, 12)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
+                    .offset(x: 0, y: -45)
+                    .opacity(rate ? 1.0 : 0)
                 )
-                
             }
                     
             Text("\(course.description)")
@@ -189,6 +222,7 @@ struct CoursePage: View {
 //               )
 //             }
         .onAppear {
+            ratings.fetchData(code: course.code)
             Firestore.firestore().collection("starred")
                 .document(userInfo.user.email).collection("mycourses")
                 .document(course.code).getDocument { (document, error) in
@@ -208,6 +242,16 @@ struct CoursePage: View {
                             isCurrent = true
                         } else {
                             isCurrent = false
+                        }
+                }
+            }
+            Firestore.firestore().collection("courseRating")
+                .document("\(course.code)\(userInfo.user.email)").getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists {
+                            self.myrating = document.get("myrating") as! Int
+                        } else {
+                            self.myrating = 0
                         }
                 }
             }

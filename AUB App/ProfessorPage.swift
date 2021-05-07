@@ -8,20 +8,75 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 
 struct ProfessorPage: View {
     @State private var name: String = ""
     @State private var password: String = ""
     @State private var rating = 0
+    @EnvironmentObject var userInfo: UserInfo
+    @State var ratings: ProfessorRatingsViewModel = ProfessorRatingsViewModel()
     @State var professor: ProfessorViewModel = ProfessorViewModel()
+    @State var rate = false
+    @State private var courserating = 0
+    @State private var myrating : Int = 0
 //    @State private var review: String = ""
     let verticalPaddingForForm = 120.0
     
+    var gesture: some Gesture {
+        let updateRating: (CGFloat)->() = { x in
+            let percent = max((x / 110.0), 0.0)
+            self.myrating = min(Int(percent * 5.0) + 1, 5)
+        }
+        return DragGesture(minimumDistance: 0, coordinateSpace: .local)
+        .onChanged({ val in
+            updateRating(val.location.x)
+        })
+        .onEnded { val in
+            updateRating(val.location.x)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    self.rate = false
+                }
+            }
+            Firestore.firestore().collection("professorRating")
+                .document("\(professor.email)\(userInfo.user.email)")
+                .setData(["myrating" : self.myrating,
+                          "userEmail" : userInfo.user.email,
+                          "profEmail" : professor.email,
+                          "id" : "\(professor.email)\(userInfo.user.email)"])
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .center) {
-            RatingView(rating: $rating)
-                .padding()
+            Button(action: {
+                withAnimation { self.rate.toggle() }
+            }) {
+                VStack(alignment: .center, spacing: 8) {
+                    RatingView(filled: myrating > 0)
+                    Text(ratings.ratings.count>0 ? ratings.professorRatings>0 ? "\(ratings.allRatings/ratings.professorRatings)" : "Rate This" : "Rate This")
+                        .foregroundColor(Color.black)
+                        .font(Font.system(size: 11, weight: .semibold, design: .rounded))
+                }
+            }
+            .overlay(
+                HStack(alignment: .center, spacing: 4) {
+                    RatingView(filled: myrating > 0)
+                    RatingView(filled: myrating > 1)
+                    RatingView(filled: myrating > 2)
+                    RatingView(filled: myrating > 3)
+                    RatingView(filled: myrating > 4)
+                }.gesture(gesture)
+                .padding(.all, 12)
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
+                .offset(x: 0, y: -45)
+                .opacity(rate ? 1.0 : 0)
+            )
+            .padding(.top, 50)
             Spacer()
             VStack(alignment: .leading) {
                 HStack {
@@ -108,6 +163,19 @@ struct ProfessorPage: View {
                 
             }.padding(50)
         }.navigationTitle("\(professor.name)")
+        .onAppear() {
+            ratings.fetchData(email: professor.email)
+            Firestore.firestore().collection("professorRating")
+                .document("\(professor.email)\(userInfo.user.email)").getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists {
+                            self.myrating = document.get("myrating") as! Int
+                        } else {
+                            self.myrating = 0
+                        }
+                }
+            }
+        }
     }
 }
 
