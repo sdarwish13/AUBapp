@@ -92,7 +92,7 @@ struct SignUpPage: View {
                     }
                     
                     Button(action: {
-                        FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password) { (result) in
+                        FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password, isadmin: self.user.isadmin) { (result) in
                             switch result {
                             case .failure(let error):
                                 self.errorString = error.localizedDescription

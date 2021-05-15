@@ -12,7 +12,7 @@ struct UserViewModel {
     var password: String = ""
     var fullname: String = ""
     var confirmPassword: String = ""
-    var major: String = ""
+    var isadmin: Int = 0
         
     func passwordsMatch(_confirmPW:String) -> Bool {
         return _confirmPW == password

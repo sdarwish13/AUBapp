@@ -53,6 +53,7 @@ struct FBAuth {
     static func createUser(withEmail email:String,
                            name: String,
                            password:String,
+                           isadmin:Int,
                            completionHandler:@escaping (Result<Bool,Error>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let err = error {
@@ -65,7 +66,7 @@ struct FBAuth {
             }
             let data = FBUser.dataDict(uid: authResult!.user.uid,
                                              name: name,
-                                             email: authResult!.user.email!)
+                                             email: authResult!.user.email!, isadmin: isadmin)
             
             FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
                 completionHandler(result)

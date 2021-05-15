@@ -133,7 +133,7 @@ struct CoursePage: View {
             }
                     
             Text("\(course.description)")
-            .frame(width: 380, height: 330)
+            .frame(width: 380, height: 280)
             .fixedSize(horizontal: false, vertical: true)
             .font(.custom("Helvetica Neue", size: 19))
             
@@ -256,6 +256,18 @@ struct CoursePage: View {
                 }
             }
         }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .bottomBar) {
+//                Spacer()
+//                Button(action: {
+//                    Firestore.firestore().collection("courseReview")
+//                        .document(course.id).delete()
+//                }) {
+//                    Image(systemName: "trash")
+//                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+//                }
+//            }
+//        }.disabled(userInfo.user.isadmin == 0)
     }
 }
 

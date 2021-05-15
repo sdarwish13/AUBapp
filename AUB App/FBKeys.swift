@@ -17,7 +17,7 @@ enum FBKeys {
         static let uid = "uid"
         static let name = "name"
         static let email = "email"
-        static let major = "major"
+        static let isadmin = "isadmin"
     }
     enum Course {
         static let code = "code"

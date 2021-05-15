@@ -176,6 +176,18 @@ struct ProfessorPage: View {
                 }
             }
         }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .bottomBar) {
+//                Spacer()
+//                Button(action: {
+//                    Firestore.firestore().collection("courseReview")
+//                        .document(professor.id).delete()
+//                }) {
+//                    Image(systemName: "trash")
+//                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
+//                }
+//            }
+//        }.disabled(userInfo.user.isadmin == 0)
     }
 }
 
