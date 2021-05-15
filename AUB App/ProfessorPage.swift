@@ -49,6 +49,7 @@ struct ProfessorPage: View {
         }
     }
     
+    
     var body: some View {
         VStack(alignment: .center) {
             Button(action: {
