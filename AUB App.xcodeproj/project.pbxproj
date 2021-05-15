@@ -54,6 +54,9 @@
 		56FB58D726063F10006BAFA2 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58D626063F10006BAFA2 /* FBUser.swift */; };
 		56FB58DA26063F81006BAFA2 /* FBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58D926063F81006BAFA2 /* FBKeys.swift */; };
 		56FB58DD26063FC9006BAFA2 /* FBFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB58DC26063FC9006BAFA2 /* FBFireStore.swift */; };
+		D5C5DCD6265049F300BBAAAD /* ProfessorReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C5DCD5265049F300BBAAAD /* ProfessorReview.swift */; };
+		D5C5DCD826504B3B00BBAAAD /* ProfessorReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C5DCD726504B3B00BBAAAD /* ProfessorReviewViewModel.swift */; };
+		D5C5DCDC26504D6400BBAAAD /* ReviewProfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C5DCDB26504D6400BBAAAD /* ReviewProfViewModel.swift */; };
 		D5CC04D7262AC72A00304A94 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D6262AC72A00304A94 /* CourseReview.swift */; };
 		D5CC04DA262AC73900304A94 /* reviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04D9262AC73900304A94 /* reviewsData.swift */; };
 		D5CC04DD262AE12900304A94 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */; };
@@ -113,6 +116,9 @@
 		56FB58D926063F81006BAFA2 /* FBKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBKeys.swift; sourceTree = "<group>"; };
 		56FB58DC26063FC9006BAFA2 /* FBFireStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBFireStore.swift; sourceTree = "<group>"; };
 		BC5CFBA567ED8D600E0DABAB /* Pods-AUB App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AUB App.release.xcconfig"; path = "Target Support Files/Pods-AUB App/Pods-AUB App.release.xcconfig"; sourceTree = "<group>"; };
+		D5C5DCD5265049F300BBAAAD /* ProfessorReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorReview.swift; sourceTree = "<group>"; };
+		D5C5DCD726504B3B00BBAAAD /* ProfessorReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorReviewViewModel.swift; sourceTree = "<group>"; };
+		D5C5DCDB26504D6400BBAAAD /* ReviewProfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProfViewModel.swift; sourceTree = "<group>"; };
 		D5CC04D6262AC72A00304A94 /* CourseReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
 		D5CC04D9262AC73900304A94 /* reviewsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewsData.swift; sourceTree = "<group>"; };
 		D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				567F20F3262B5D4E00BEE7AF /* AddProfessor.swift */,
 				560DC65726027C47007D1300 /* CoursePage.swift */,
 				D5CC04D6262AC72A00304A94 /* CourseReview.swift */,
+				D5C5DCD5265049F300BBAAAD /* ProfessorReview.swift */,
 				567F20FA262B6EE000BEE7AF /* ProfessorPage.swift */,
 				56412764263FE52C00F2482D /* CourseProfessorsList.swift */,
 				5641275C263DC10800F2482D /* ProfessorCoursesList.swift */,
@@ -184,6 +191,8 @@
 				D5CC04DC262AE12800304A94 /* ReviewViewModel.swift */,
 				567F20ED262B59B300BEE7AF /* ProfessorViewModel.swift */,
 				D5CC04DF262AE1AF00304A94 /* CourseReviewViewModel.swift */,
+				D5C5DCDB26504D6400BBAAAD /* ReviewProfViewModel.swift */,
+				D5C5DCD726504B3B00BBAAAD /* ProfessorReviewViewModel.swift */,
 				568B3BDD261DEC3C00C90EAF /* AllCoursesViewModel.swift */,
 				566EE7EB26431EA400AD2334 /* CourseRatingsViewModel.swift */,
 				566EE7ED26454DBC00AD2334 /* ProfessorRatingsViewModel.swift */,
@@ -351,6 +360,7 @@
 				560DC64B26027709007D1300 /* SignInPage.swift in Sources */,
 				56D677F526114FAD0029F859 /* MenuView.swift in Sources */,
 				567F20F7262B6DEA00BEE7AF /* AllProfessorsPage.swift in Sources */,
+				D5C5DCDC26504D6400BBAAAD /* ReviewProfViewModel.swift in Sources */,
 				566EE7EE26454DBC00AD2334 /* ProfessorRatingsViewModel.swift in Sources */,
 				561EF46E260680C100837BDA /* HomePage.swift in Sources */,
 				56FB58D726063F10006BAFA2 /* FBUser.swift in Sources */,
@@ -371,6 +381,7 @@
 				5641275D263DC10800F2482D /* ProfessorCoursesList.swift in Sources */,
 				565B55902604910000894858 /* UserViewModel.swift in Sources */,
 				567F20EE262B59B300BEE7AF /* ProfessorViewModel.swift in Sources */,
+				D5C5DCD6265049F300BBAAAD /* ProfessorReview.swift in Sources */,
 				5677BFA82611D1E8003FA00C /* AddCourse.swift in Sources */,
 				5687D01225E829890090561D /* DocumentsPage.swift in Sources */,
 				561EF4552606734100837BDA /* FBAuth.swift in Sources */,
@@ -395,6 +406,7 @@
 				56FB58DA26063F81006BAFA2 /* FBKeys.swift in Sources */,
 				D5CC04DD262AE12900304A94 /* ReviewViewModel.swift in Sources */,
 				565B559326051C8E00894858 /* ForgotPasswordView.swift in Sources */,
+				D5C5DCD826504B3B00BBAAAD /* ProfessorReviewViewModel.swift in Sources */,
 				56CFA0BB25DD1E1700007F0E /* AUB_AppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

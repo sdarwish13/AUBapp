@@ -79,6 +79,10 @@ struct ProfessorPage: View {
             )
             .padding(.top, 50)
             Spacer()
+            Image(professor.name)
+                               .resizable()
+                               .frame(width: 200.0, height: 200.0)
+                               .padding(.leading,60)
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "envelope.fill")
