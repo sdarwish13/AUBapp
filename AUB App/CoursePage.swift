@@ -104,6 +104,16 @@ struct CoursePage: View {
                                 .font(.title)
                                 .foregroundColor(isStarred ? Color(red: 0.4, green: 0.8, blue:8) : .black)
                         }.padding(5)
+                        
+                        Button(action: {
+                            Firestore.firestore().collection("courses")
+                                .document(course.id).delete()
+                        }) {
+                            Image(systemName: "trash")
+                                .font(.title)
+                                .foregroundColor(userInfo.user.isadmin == 0 ? .gray : Color(red: 0.4, green: 0.8, blue: 6))
+                        }.disabled(userInfo.user.isadmin == 0)
+                        .padding()
                     }
                 }
                 Button(action: {
@@ -256,18 +266,6 @@ struct CoursePage: View {
                 }
             }
         }
-//        .toolbar {
-//            ToolbarItemGroup(placement: .bottomBar) {
-//                Spacer()
-//                Button(action: {
-//                    Firestore.firestore().collection("courseReview")
-//                        .document(course.id).delete()
-//                }) {
-//                    Image(systemName: "trash")
-//                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
-//                }
-//            }
-//        }.disabled(userInfo.user.isadmin == 0)
     }
 }
 

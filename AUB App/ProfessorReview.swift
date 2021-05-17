@@ -53,7 +53,7 @@ struct ProfessorReview: View {
                             
                             if(review.email == userInfo.user.email || userInfo.user.isadmin == 1) {
                                 Button(action: {
-                                    Firestore.firestore().collection("courseReview")
+                                    Firestore.firestore().collection("professorReview")
                                         .document(review.id)
                                         .delete()
                                     print("deleted review")

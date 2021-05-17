@@ -52,37 +52,56 @@ struct ProfessorPage: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Button(action: {
-                withAnimation { self.rate.toggle() }
-            }) {
-                VStack(alignment: .center, spacing: 8) {
-                    RatingView(filled: myrating > 0)
-                    Text(ratings.ratings.count>0 ? ratings.professorRatings>0 ? "\(ratings.allRatings/ratings.professorRatings)" : "Rate This" : "Rate This")
-                        .foregroundColor(Color.black)
-                        .font(Font.system(size: 11, weight: .semibold, design: .rounded))
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        Firestore.firestore().collection("professors")
+                            .document(professor.email).delete()
+                    }) {
+                        Image(systemName: "trash")
+                            .font(.title2)
+                            .foregroundColor(userInfo.user.isadmin == 0 ? .gray : Color(red: 0.4, green: 0.8, blue: 6))
+                    }.disabled(userInfo.user.isadmin == 0)
+                    .padding()
                 }
-            }
-            .overlay(
-                HStack(alignment: .center, spacing: 4) {
-                    RatingView(filled: myrating > 0)
-                    RatingView(filled: myrating > 1)
-                    RatingView(filled: myrating > 2)
-                    RatingView(filled: myrating > 3)
-                    RatingView(filled: myrating > 4)
-                }.gesture(gesture)
-                .padding(.all, 12)
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
-                .offset(x: 0, y: -45)
-                .opacity(rate ? 1.0 : 0)
-            )
-            .padding(.top, 50)
+                
+                Button(action: {
+                    withAnimation { self.rate.toggle() }
+                }) {
+                    VStack(alignment: .center, spacing: 8) {
+                        RatingView(filled: myrating > 0)
+                        Text(ratings.ratings.count>0 ? ratings.professorRatings>0 ? "\(ratings.allRatings/ratings.professorRatings)" : "Rate This" : "Rate This")
+                            .foregroundColor(Color.black)
+                            .font(Font.system(size: 11, weight: .semibold, design: .rounded))
+                    }
+                }
+                .overlay(
+                    HStack(alignment: .center, spacing: 4) {
+                        RatingView(filled: myrating > 0)
+                        RatingView(filled: myrating > 1)
+                        RatingView(filled: myrating > 2)
+                        RatingView(filled: myrating > 3)
+                        RatingView(filled: myrating > 4)
+                    }.gesture(gesture)
+                    .padding(.all, 12)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 0)
+                    .offset(x: 0, y: -45)
+                    .opacity(rate ? 1.0 : 0)
+                )
+                
+            }.padding(.top, 50)
+            
             Spacer()
-            Image(professor.name)
-                               .resizable()
-                               .frame(width: 200.0, height: 200.0)
-                               .padding(.leading,60)
+            HStack {
+                Spacer()
+                Image(professor.name)
+                    .resizable()
+                    .frame(width: 200.0, height: 200.0)
+                Spacer()
+            }
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "envelope.fill")
@@ -148,7 +167,7 @@ struct ProfessorPage: View {
                 .foregroundColor(Color.white)
                 .cornerRadius(10)
 
-                Button(action: {}) {
+                NavigationLink(destination: ProfessorReview(professor: professor)) {
                     VStack{
                         Text("Reviews")
                             .fixedSize(horizontal: false, vertical: true)
@@ -181,18 +200,6 @@ struct ProfessorPage: View {
                 }
             }
         }
-//        .toolbar {
-//            ToolbarItemGroup(placement: .bottomBar) {
-//                Spacer()
-//                Button(action: {
-//                    Firestore.firestore().collection("courseReview")
-//                        .document(professor.id).delete()
-//                }) {
-//                    Image(systemName: "trash")
-//                        .foregroundColor(Color(red: 0.4, green: 0.8, blue: 6))
-//                }
-//            }
-//        }.disabled(userInfo.user.isadmin == 0)
     }
 }
 
